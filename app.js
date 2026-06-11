@@ -308,18 +308,19 @@ function App() {
               )
             )
       ),
-      React.createElement('section', { style: { marginTop: '1.5rem', padding: '1rem', background: '#f8fafc', borderRadius: 12, border: '1px solid #cbd5e1' } },
-        React.createElement('h2', { style: { marginBottom: '0.75rem' } }, 'Información sobre consumo moderado y descanso'),
-        React.createElement('ul', { style: { paddingLeft: '1.2rem', margin: 0, color: '#0f172a' } },
-          React.createElement('li', null,
-            React.createElement('a', { href: 'https://www.sanidad.gob.es/', target: '_blank', rel: 'noreferrer noopener', style: { color: '#1d4ed8' } }, 'Ministerio de Sanidad: recomendaciones generales de salud y nutrición')
+      React.createElement('section', { style: { marginTop: '1.5rem', padding: '1rem', background: '#f0f9ff', borderRadius: 12, border: '1px solid #bfdbfe' } },
+        React.createElement('h2', { style: { marginBottom: '0.75rem' } }, 'Cómo funciona la cafeína en tu cuerpo'),
+        React.createElement('div', { style: { color: '#0c2340', lineHeight: 1.6 } },
+          React.createElement('p', null, 'La cafeína se absorbe rápidamente en el torrente sanguíneo. Alcanza su nivel máximo aproximadamente 45 minutos (0.75 horas) después de consumir el café. Desde ese momento, el cuerpo comienza a eliminarla gradualmente.'),
+          React.createElement('p', { style: { marginTop: '0.75rem' } }, React.createElement('strong', null, 'Vida media: 5 horas')),
+          React.createElement('p', null, 'Este concepto significa que cada 5 horas, la cantidad de cafeína en tu sangre se reduce a la mitad. Por ejemplo:'),
+          React.createElement('ul', { style: { paddingLeft: '1.5rem', margin: '0.5rem 0' } },
+            React.createElement('li', null, 'Si tomas 120 mg de cafeína, en 5 horas quedan 60 mg'),
+            React.createElement('li', null, 'En 10 horas quedan 30 mg'),
+            React.createElement('li', null, 'En 15 horas quedan 15 mg'),
+            React.createElement('li', null, 'En 20 horas quedan 7.5 mg (casi imperceptible)')
           ),
-          React.createElement('li', { style: { marginTop: '0.5rem' } },
-            React.createElement('a', { href: 'https://www.aesan.gob.es/AECOSAN/web/seguridad_alimentaria/subdetalle/consumo_cafeina.htm', target: '_blank', rel: 'noreferrer noopener', style: { color: '#1d4ed8' } }, 'AESAN: consumo seguro de cafeína y recomendaciones alimentarias')
-          ),
-          React.createElement('li', { style: { marginTop: '0.5rem' } },
-            React.createElement('a', { href: 'https://www.efsa.europa.eu/es/topics/topic/caffeine', target: '_blank', rel: 'noreferrer noopener', style: { color: '#1d4ed8' } }, 'EFSA: opinión científica sobre cafeína y salud')
-          )
+          React.createElement('p', { style: { marginTop: '0.75rem' } }, 'Este gráfico estima tu cafeína actual basándose en lo que has anotado. Usa esta información para planificar tus cafés y asegurar un buen descanso.')
         )
       )
     )
