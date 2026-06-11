@@ -281,6 +281,20 @@ function App() {
                 )
               )
             )
+      ),
+      React.createElement('section', { style: { marginTop: '1.5rem', padding: '1rem', background: '#f8fafc', borderRadius: 12, border: '1px solid #cbd5e1' } },
+        React.createElement('h2', { style: { marginBottom: '0.75rem' } }, 'Información sobre consumo moderado y descanso'),
+        React.createElement('ul', { style: { paddingLeft: '1.2rem', margin: 0, color: '#0f172a' } },
+          React.createElement('li', null,
+            React.createElement('a', { href: 'https://www.sanidad.gob.es/', target: '_blank', rel: 'noreferrer noopener', style: { color: '#1d4ed8' } }, 'Ministerio de Sanidad: recomendaciones generales de salud y nutrición')
+          ),
+          React.createElement('li', { style: { marginTop: '0.5rem' } },
+            React.createElement('a', { href: 'https://www.aesan.gob.es/AECOSAN/web/seguridad_alimentaria/subdetalle/consumo_cafeina.htm', target: '_blank', rel: 'noreferrer noopener', style: { color: '#1d4ed8' } }, 'AESAN: consumo seguro de cafeína y recomendaciones alimentarias')
+          ),
+          React.createElement('li', { style: { marginTop: '0.5rem' } },
+            React.createElement('a', { href: 'https://www.efsa.europa.eu/es/topics/topic/caffeine', target: '_blank', rel: 'noreferrer noopener', style: { color: '#1d4ed8' } }, 'EFSA: opinión científica sobre cafeína y salud')
+          )
+        )
       )
     )
   );
