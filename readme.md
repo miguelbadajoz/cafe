@@ -17,7 +17,7 @@ Este proyecto es un front end sencillo en React para registrar los cafés consum
 - Muestra un resumen bajo el gráfico con:
     - Contenido actual
     - Contenido máximo
-    - Hora adecuada para irse a dormir
+    - Grado de cafeína (Limpio, Bajo, Medio, Alto) con frase aleatoria sobre el impacto en el descanso
 
 ## Archivos
 
@@ -62,6 +62,29 @@ http://localhost:8000
 
 ## Notas
 
-- La curva usa un modelo de eliminación de cafeína con semivida de 8 horas.
+- La curva usa un modelo de eliminación de cafeína con semivida de 5 horas (estándar en adultos).
+- El pico de absorción máxima de cafeína ocurre aproximadamente 0.75 horas (45 minutos) después de la ingesta.
 - El eje X cubre el día completo de 0h a 24h y el gráfico marca la hora actual con una línea vertical.
 - El gráfico es un cálculo estimado para visualizar el impacto acumulado de los cafés anotados.
+
+## Contexto para Implementación: Función de Decaimiento de Cafeína
+
+Necesito programar una función que modele la eliminación de la cafeína en el cuerpo humano a lo largo del tiempo utilizando una cinética de primer orden (decaimiento exponencial).
+
+### La Ecuación Matemática Estándar
+
+La cantidad de cafeína remanente en el cuerpo en un momento dado $t$ (medido en horas), tras haber alcanzado el pico de absorción plasmática, se rige por la siguiente función exponencial:
+
+$$C(t) = C_0 \cdot \left(\frac{1}{2}\right)^{\frac{t}{\tau_{1/2}}}$$
+
+O su forma equivalente usando la constante de decaimiento ($k$):
+
+$$C(t) = C_0 \cdot e^{-k \cdot t}$$
+
+Donde:
+- `C(t)`: Cantidad de cafeína remanente (en mg) en el tiempo `t`.
+- `C_0`: Dosis inicial absorbida (en mg) que llega al torrente sanguíneo. El pico máximo ocurre aproximadamente 0.75 horas (45 minutos) después de la ingesta.
+- `t`: Tiempo transcurrido (en horas) desde el pico de absorción máxima.
+- `\tau_{1/2}` (half_life): Vida media de la cafeína en el organismo. Para un adulto estándar, el valor promedio es de 5.0 horas.
+- `k`: Constante de eliminación metabólica, derivada directamente de la vida media:
+  $$k = \frac{\ln(2)}{\tau_{1/2}} \approx 0.13863$$

@@ -6,13 +6,15 @@ function parseTime(value) {
 }
 
 function estimateCaffeine(entries, map, atHour) {
-  const halfLife = 8; // horas
-  const decay = Math.log(2) / halfLife;
+  const halfLife = 5; // horas (semivida estándar de cafeína en adultos)
+  const absorptionDelay = 0.75; // horas (pico de absorción máxima)
+  const k = Math.log(2) / halfLife;
   return entries.reduce((sum, entry) => {
     const entryTime = parseTime(entry.time);
-    if (atHour < entryTime) return sum;
+    const timeFromPeak = atHour - (entryTime + absorptionDelay);
+    if (timeFromPeak < 0) return sum;
     const amount = map[entry.size] ?? 0;
-    return sum + amount * Math.exp(-decay * (atHour - entryTime));
+    return sum + amount * Math.exp(-k * timeFromPeak);
   }, 0);
 }
 
@@ -23,15 +25,17 @@ function formatTimeLabel(value) {
 }
 
 function buildChartPoints(entries, map) {
-  const halfLife = 8; // horas
-  const decay = Math.log(2) / halfLife;
+  const halfLife = 5; // horas
+  const absorptionDelay = 0.75; // horas
+  const k = Math.log(2) / halfLife;
   const data = Array.from({ length: 49 }, (_, i) => {
     const x = i * 0.5;
     const y = entries.reduce((sum, entry) => {
       const entryTime = parseTime(entry.time);
-      if (x < entryTime) return sum;
+      const timeFromPeak = x - (entryTime + absorptionDelay);
+      if (timeFromPeak < 0) return sum;
       const amount = map[entry.size] ?? 0;
-      return sum + amount * Math.exp(-decay * (x - entryTime));
+      return sum + amount * Math.exp(-k * timeFromPeak);
     }, 0);
     return { x, y };
   });
