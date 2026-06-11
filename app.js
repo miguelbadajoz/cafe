@@ -120,8 +120,15 @@ function App() {
     yInterval = 100;
   }
   const yLabels = Array.from({ length: Math.floor(roundedMaxY / yInterval) + 1 }, (_, i) => i * yInterval).reverse();
-  const grade = currentCaffeine <= 30 ? 'Bajo' : currentCaffeine <= 80 ? 'Medio' : 'Alto';
+  const grade = currentCaffeine <= 5 ? 'Limpio' : currentCaffeine <= 30 ? 'Bajo' : currentCaffeine <= 80 ? 'Medio' : 'Alto';
   const phrasesByGrade = {
+    Limpio: [
+      'Nivel limpio: casi como si no hubieras tomado café.',
+      'Tan ligero que tu almohada no notará diferencia.',
+      'Casi aire, casi descanso; perfecto para la noche.',
+      'Limpio y tranquilo: el sueño está en calma.',
+      'Tu café hoy ha dejado un rastro muy suave.'
+    ],
     Bajo: [
       'Casi pareces agua con cafeína: el descanso está tranquilo.',
       'Tu cuerpo puede dormir casi sin protestar.',
