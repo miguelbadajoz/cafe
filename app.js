@@ -106,7 +106,6 @@ function App() {
   const width = 660;
   const height = 340;
   const padding = 50;
-  const sleepThreshold = 5;
   let yInterval = 10;
   let labelCount = Math.floor(roundedMaxY / yInterval) + 1;
   if (labelCount > 6) {
@@ -121,14 +120,31 @@ function App() {
     yInterval = 100;
   }
   const yLabels = Array.from({ length: Math.floor(roundedMaxY / yInterval) + 1 }, (_, i) => i * yInterval).reverse();
-  const estimatedSleepTime = (() => {
-    for (let i = currentHour; i <= 24; i += 0.5) {
-      if (estimateCaffeine(entries, caffeineMap, i) <= sleepThreshold) {
-        return formatTimeLabel(i);
-      }
-    }
-    return 'mañana';
-  })();
+  const grade = currentCaffeine <= 30 ? 'Bajo' : currentCaffeine <= 80 ? 'Medio' : 'Alto';
+  const phrasesByGrade = {
+    Bajo: [
+      'Casi pareces agua con cafeína: el descanso está tranquilo.',
+      'Tu cuerpo puede dormir casi sin protestar.',
+      'Nivel suave: el sillón gana la partida.',
+      'Café amable hoy: no debería liar mucho tu noche.',
+      'Un paso ligero por la cafetería, no por la cama.'
+    ],
+    Medio: [
+      'Moderado, así que el sueño puede costar un poco más de lo habitual.',
+      'Cuidado: la cama te llama, pero el café aún susurra.',
+      'Estás en zona productiva, pero el descanso puede resentirse.',
+      'Un punto medio: lo mismo te deja soñar con trabajo.',
+      'Nivel medio: la noche puede pedir un poco más de calma.'
+    ],
+    Alto: [
+      '¡Alerta! Esa dosis puede convertir la noche en una maratón mental.',
+      'Nivel alto: el sueño puede tardar en aparecer.',
+      'Tu almohada está a punto de ponerse celosa.',
+      'Café potente: la cama puede quedarse esperando.',
+      'Más vale que no tengas reunión temprano mañana.'
+    ]
+  };
+  const phrase = phrasesByGrade[grade][Math.floor(Math.random() * phrasesByGrade[grade].length)];
   const coords = points
     .map((point) => {
       const px = padding + (point.x / 24) * (width - padding * 2);
@@ -185,8 +201,6 @@ function App() {
         React.createElement('div', { style: { marginTop: '0.75rem', padding: '1rem', background: '#fff', borderRadius: 12, boxShadow: '0 1px 6px rgba(0,0,0,0.08)' } },
           React.createElement('svg', { viewBox: `0 0 ${width} ${height}`, style: { width: '100%', height: 'auto' } },
             React.createElement('rect', { x: 0, y: 0, width, height, fill: 'transparent' }),
-            React.createElement('rect', { x: padding, y: height - padding - (5 / roundedMaxY) * (height - 2 * padding), width: width - 2 * padding, height: (5 / roundedMaxY) * (height - 2 * padding), fill: '#dcfce7', opacity: 0.6 }),
-            React.createElement('line', { x1: padding, y1: height - padding - (5 / roundedMaxY) * (height - 2 * padding), x2: width - padding, y2: height - padding - (5 / roundedMaxY) * (height - 2 * padding), stroke: '#22c55e', strokeWidth: 2 }),
             React.createElement('line', { x1: padding, y1: padding, x2: padding, y2: height - padding, stroke: '#94a3b8', strokeWidth: 1 }),
             React.createElement('line', { x1: padding, y1: height - padding, x2: width - padding, y2: height - padding, stroke: '#94a3b8', strokeWidth: 1 }),
             React.createElement('polyline', {
@@ -241,8 +255,9 @@ function App() {
               React.createElement('p', { style: { margin: '0.5rem 0 0', color: '#0f172a' } }, `${Math.round(maxCaffeine)} mg`)
             ),
             React.createElement('div', { style: { padding: '1rem', background: '#f8fafc', borderRadius: 12, border: '1px solid #cbd5e1' } },
-              React.createElement('strong', null, 'Hora adecuada para dormir'),
-              React.createElement('p', { style: { margin: '0.5rem 0 0', color: '#0f172a' } }, estimatedSleepTime)
+              React.createElement('strong', null, 'Grado de cafeína'),
+              React.createElement('p', { style: { margin: '0.5rem 0 0', color: '#0f172a' } }, grade),
+              React.createElement('p', { style: { margin: '0.75rem 0 0', color: '#334155', fontStyle: 'italic' } }, phrase)
             )
           )
         )
